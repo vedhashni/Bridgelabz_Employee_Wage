@@ -35,7 +35,14 @@ namespace Employee_Wage_Computation_Problem
                 }
                 empPerDayWage = empHours * wage_perhour;
                 empTotalWage += empPerDayWage;
+                if (employeeAttendance > 0)
+                {
+                    empTotalWorkingday += 1;
+                }
+                empTotalWorkingHour += empHours;
             }
+            Console.WriteLine("Employee's wage for Working Hour : " + empTotalWorkingday + " and Working Hour : " + empTotalWorkingHour + " is " + empTotalWage);
+
         }
     }
 }
