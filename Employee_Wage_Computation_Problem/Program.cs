@@ -33,6 +33,7 @@ namespace Employee_Wage_Computation_Problem
                         empHours = 0;
                         break;
                 }
+                empPerDayWage = empHours * wage_perhour;
             }
         }
     }
