@@ -34,6 +34,7 @@ namespace Employee_Wage_Computation_Problem
                         break;
                 }
                 empPerDayWage = empHours * wage_perhour;
+                empTotalWage += empPerDayWage;
             }
         }
     }
