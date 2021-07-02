@@ -9,7 +9,7 @@ namespace Employee_Wage_Computation_Problem
         public const int total_workingdays = 20;
         public const int wage_perhour = 20;
         public const int total_workinghour = 100;
-        static void Main(string[] args)
+        public static void ComputeWage()
         {
             Console.WriteLine("Welcome To Employee_Wage_Computation!");
             int empHours = 0;
@@ -24,12 +24,15 @@ namespace Employee_Wage_Computation_Problem
                 switch (employeeAttendance)
                 {
                     case full_time:
+                        Console.WriteLine("Employee is present for part-time");
                         empHours = 8;
                         break;
                     case part_time:
+                        Console.WriteLine("Employee is present for part-time");
                         empHours = 4;
                         break;
                     default:
+                        Console.WriteLine("Employee is absent");
                         empHours = 0;
                         break;
                 }
@@ -43,6 +46,11 @@ namespace Employee_Wage_Computation_Problem
             }
             Console.WriteLine("Employee's wage for Working Hour : " + empTotalWorkingday + " and Working Hour : " + empTotalWorkingHour + " is " + empTotalWage);
 
+        }
+
+        static void Main(string[] args)
+        {
+            ComputeWage();
         }
     }
 }
