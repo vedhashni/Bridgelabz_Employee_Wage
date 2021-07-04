@@ -4,20 +4,21 @@ using System.Text;
 
 namespace Employee_Wage_Computation_Problem
 {
-    class CompanyEmpWage
+    public class CompanyEmpWage
     {
         public string company;
-        public int wagePerHour;
+        public int numofworkingdays;
+        public int emprateperhour;
         public int maxHoursPerMonth;
         public int maxWorkingDays;
         public int totalWage;
 
-        public CompanyEmpWage(string company, int wagePerHour, int maxHoursPerMonth, int maxWorkingDays)
+        public CompanyEmpWage(string company, int emprateperhour, int numofworkingdays, int maxHoursPerMonth)
         {
             this.company = company;
-            this.wagePerHour = wagePerHour;
+            this.numofworkingdays = numofworkingdays;
             this.maxHoursPerMonth = maxHoursPerMonth;
-            this.maxWorkingDays = maxWorkingDays;
+            this.emprateperhour = emprateperhour;
         }
         public void setTotalEmpWage(int totalWage)
         {
