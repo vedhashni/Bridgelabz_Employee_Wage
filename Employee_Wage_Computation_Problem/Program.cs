@@ -22,16 +22,22 @@ namespace Employee_Wage_Computation_Problem
             this.total_workingdays = total_workingdays;
             this.total_workinghour = total_workinghour;
         }*/
-        public class EmpBuilderWage
+        //public class EmpBuilderWage
+        public interface ComputationEmployeeWage
         {
+            void ComputeEmpWage();
+            int ComputeEmpWage(CompanyEmpWage companyEmpWage);
+        }
 
-            //public const int FULL_TIME = 1;
-            //public const int PART_TIME = 2;
+        //public const int FULL_TIME = 1;
+        //public const int PART_TIME = 2;
+        public class EmpBuilderWage : ComputationEmployeeWage
+        {
             private int numberOfCompany = 0;
-            private int employeeDailyWage = 0;
+            //private int employeeDailyWage = 0;
             private CompanyEmpWage[] companyEmpWageArray;
             private int totalWage;
-            private int wagePerHour;
+            //private int wagePerHour;
             public EmpBuilderWage()
             {
                 //while (empTotalWorkingday <= total_workingdays && empTotalWorkingHour <= total_workinghour)
@@ -54,52 +60,53 @@ namespace Employee_Wage_Computation_Problem
                 //empTotalWorkingHour += empHours;
 
             }
-        private int ComputeEmpWage(CompanyEmpWage companyEmpWage)
-        {
-            //Console.WriteLine("Welcome to employee wage computation");
-            //Creating a Random Function
-            int empHours = 0, totalEmpHrs = 0, totalWorkingDays = 0, workingHrs = 0;
-
-
-            while (totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays <= companyEmpWage.maxWorkingDays)
+            public int ComputeEmpWage(CompanyEmpWage companyEmpWage)
             {
-                //Calling the next method in Random Class
-                totalWorkingDays++;
-                Random r = new Random();
-                int empAttendance = r.Next(0, 3);
-                switch (empAttendance)
+                //Console.WriteLine("Welcome to employee wage computation");
+                //Creating a Random Function
+                int empHours = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+
+
+                while (totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays <= companyEmpWage.maxWorkingDays)
                 {
-                    case full_time:
-                        empHours = 8;
-                        break;
-                    case part_time:
-                        empHours = 4;
-                        break;
-                    default:
-                        empHours = 0;
-                        break;
+                    //Calling the next method in Random Class
+                    totalWorkingDays++;
+                    Random r = new Random();
+                    int empAttendance = r.Next(0, 3);
+                    switch (empAttendance)
+                    {
+                        case full_time:
+                            empHours = 8;
+                            break;
+                        case part_time:
+                            empHours = 4;
+                            break;
+                        default:
+                            empHours = 0;
+                            break;
+
+                    }
+
+                    totalEmpHrs += empHours;
 
                 }
 
-                totalEmpHrs += empHours;
 
+                Console.WriteLine("Days : " + totalWorkingDays + " Emp Hours : " + empHours);
+                return totalEmpHrs * companyEmpWage.wagePerHour;
             }
-        
-
-        Console.WriteLine("Days : " + totalWorkingDays + " Emp Hours : " + empHours);
-                return totalEmpHrs* companyEmpWage.wagePerHour;
-    }
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Welcome to employee wage computation");
-        EmpBuilderWage empBuilderWage = new EmpBuilderWage();
-        empBuilderWage.addCompanyEmpWage("TCS", 20, 15, 10);
-        empBuilderWage.addCompanyEmpWage("Accenture", 10, 20, 20);
-        empBuilderWage.ComputeEmpWage();
-    }
+            static void Main(string[] args)
+            {
+                Console.WriteLine("Welcome To Employee_Wage_Computation!");
+                EmpBuilderWage empBuilderWage = new EmpBuilderWage();
+                empBuilderWage.addCompanyEmpWage("TVSNext", 78, 15, 90);
+                empBuilderWage.addCompanyEmpWage("Zoho", 50, 60, 40);
+                empBuilderWage.ComputeEmpWage();
+            }
 
 
-   
+
+        }
     }
 }
 
