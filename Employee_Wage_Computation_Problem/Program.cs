@@ -1,75 +1,105 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Employee_Wage_Computation_Problem
 {
     class Program
     {
+
+        //Console.WriteLine("Welcome To Employee_Wage_Computation!");
         public const int full_time = 1;
         public const int part_time = 2;
-        public string company;
+        /*public string company;
         public int WAGE_PER_HOUR;
         public int total_workinghour;
         public int total_workingdays;
-        public int wage_perhour;
-        public Program(string company, int wage_perhour, int total_workingdays, int total_workinghour)
+        public int wage_perhour;*/
+        /*public Program(string company, int wage_perhour, int total_workingdays, int total_workinghour)
         {
             this.company = company;
             this.wage_perhour = wage_perhour;
             this.total_workingdays = total_workingdays;
             this.total_workinghour = total_workinghour;
-        }
-        public  void ComputeWage()
-        { 
-            Console.WriteLine("Welcome To Employee_Wage_Computation!");
-            int empHours = 0;
-            int empTotalWorkingday = 1;
-            int empTotalWorkingHour = 0;
-            int empPerDayWage = 0;
-            int empTotalWage = 0;
-            Random random = new Random();
-            while (empTotalWorkingday <= total_workingdays && empTotalWorkingHour <= total_workinghour)
+        }*/
+        public class EmpBuilderWage
+        {
+
+            //public const int FULL_TIME = 1;
+            //public const int PART_TIME = 2;
+            private int numberOfCompany = 0;
+            private int employeeDailyWage = 0;
+            private CompanyEmpWage[] companyEmpWageArray;
+            private int totalWage;
+            private int wagePerHour;
+            public EmpBuilderWage()
             {
-                int employeeAttendance = random.Next(0, 3);
-                switch (employeeAttendance)
+                //while (empTotalWorkingday <= total_workingdays && empTotalWorkingHour <= total_workinghour)
+                this.companyEmpWageArray = new CompanyEmpWage[5];
+            }
+            public void addCompanyEmpWage(string company, int wagePerhour, int maxHoursPerMonth, int maxWorkingDays)
+            {
+                companyEmpWageArray[this.numberOfCompany] = new CompanyEmpWage(company, wagePerhour, maxHoursPerMonth, maxWorkingDays);
+                numberOfCompany++;
+            }
+            public void ComputeEmpWage()
+            {
+                for (int i = 0; i < numberOfCompany; i++)
+                {
+
+                    companyEmpWageArray[i].setTotalEmpWage(this.ComputeEmpWage(this.companyEmpWageArray[i]));
+                    Console.WriteLine(this.companyEmpWageArray[i].toString());
+
+                }
+                //empTotalWorkingHour += empHours;
+
+            }
+        private int ComputeEmpWage(CompanyEmpWage companyEmpWage)
+        {
+            //Console.WriteLine("Welcome to employee wage computation");
+            //Creating a Random Function
+            int empHours = 0, totalEmpHrs = 0, totalWorkingDays = 0, workingHrs = 0;
+
+
+            while (totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays <= companyEmpWage.maxWorkingDays)
+            {
+                //Calling the next method in Random Class
+                totalWorkingDays++;
+                Random r = new Random();
+                int empAttendance = r.Next(0, 3);
+                switch (empAttendance)
                 {
                     case full_time:
-                        Console.WriteLine("Employee is present for part-time");
                         empHours = 8;
                         break;
                     case part_time:
-                        Console.WriteLine("Employee is present for part-time");
                         empHours = 4;
                         break;
                     default:
-                        Console.WriteLine("Employee is absent");
                         empHours = 0;
                         break;
+
                 }
-                empPerDayWage = empHours * wage_perhour;
-                empTotalWage += empPerDayWage;
-                if (employeeAttendance > 0)
-                {
-                    empTotalWorkingday += 1;
-                }
-                empTotalWorkingHour += empHours;
+
+                totalEmpHrs += empHours;
+
             }
-            Console.WriteLine("Company Name:" + company);
-            Console.WriteLine("Working Hours :" + empTotalWorkingHour);
-            Console.WriteLine("Employee Wage Per day :" + empPerDayWage);
-            Console.WriteLine("Working days in a month :" + empTotalWorkingday);
-            Console.WriteLine("Employee Wage for 20 working days :" + empTotalWage);
+        
 
-        }
+        Console.WriteLine("Days : " + totalWorkingDays + " Emp Hours : " + empHours);
+                return totalEmpHrs* companyEmpWage.wagePerHour;
+    }
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Welcome to employee wage computation");
+        EmpBuilderWage empBuilderWage = new EmpBuilderWage();
+        empBuilderWage.addCompanyEmpWage("TCS", 20, 15, 10);
+        empBuilderWage.addCompanyEmpWage("Accenture", 10, 20, 20);
+        empBuilderWage.ComputeEmpWage();
+    }
 
-        static void Main(string[] args)
-        {
-            Program TVSNext = new Program("TVSNext", 55, 12, 60);
-            TVSNext.ComputeWage();
-            Program Zoho = new Program("Zoho", 85, 52, 90);
-            Zoho.ComputeWage();
-            Program CTS = new Program("CTS", 65, 40, 70);
-            CTS.ComputeWage();
-        }
+
+   
     }
 }
 
