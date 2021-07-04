@@ -6,11 +6,20 @@ namespace Employee_Wage_Computation_Problem
     {
         public const int full_time = 1;
         public const int part_time = 2;
-        //public const int total_workingdays = 20;
-        //public const int wage_perhour = 20;
-        //public const int total_workinghour = 100;
-        public static void ComputeWage(string company, int wage_per_hour, int total_workingdays, int total_workinghour)
+        public string company;
+        public int WAGE_PER_HOUR;
+        public int total_workinghour;
+        public int total_workingdays;
+        public int wage_perhour;
+        public Program(string company, int wage_perhour, int total_workingdays, int total_workinghour)
         {
+            this.company = company;
+            this.wage_perhour = wage_perhour;
+            this.total_workingdays = total_workingdays;
+            this.total_workinghour = total_workinghour;
+        }
+        public  void ComputeWage()
+        { 
             Console.WriteLine("Welcome To Employee_Wage_Computation!");
             int empHours = 0;
             int empTotalWorkingday = 1;
@@ -54,9 +63,12 @@ namespace Employee_Wage_Computation_Problem
 
         static void Main(string[] args)
         {
-            ComputeWage("TVSNext", 80, 12, 90);
-            ComputeWage("CTS", 55, 22, 110);
-            ComputeWage("Zoho", 78, 32, 120);
+            Program TVSNext = new Program("TVSNext", 55, 12, 60);
+            TVSNext.ComputeWage();
+            Program Zoho = new Program("Zoho", 85, 52, 90);
+            Zoho.ComputeWage();
+            Program CTS = new Program("CTS", 65, 40, 70);
+            CTS.ComputeWage();
         }
     }
 }
